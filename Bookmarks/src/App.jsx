@@ -1,19 +1,17 @@
-import Navbar from './components/Navbar'
-import Tiles from './components/Tiles'
+import TilePage from "./pages/TilePage"
+import LoginPage from "./pages/LoginPage"
+import RegisterPage from "./pages/RegisterPage"
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
-
-  const onClick = () => {
-    console.log('Hello')
-  }
-
   
   return (
     <>
-      <div className='flex justify-center items-center h-screen flex-col'> 
-        <Navbar />
-        <Tiles onClick={onClick}/>
-      </div>
+      <Routes>
+        <Route path="/" element={<TilePage />}/>
+        <Route path="/login" element={<LoginPage />}/>
+        <Route path="/register" element={<RegisterPage />}/>
+      </Routes>
     </>
   )
 }
