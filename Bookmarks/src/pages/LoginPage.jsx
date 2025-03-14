@@ -13,7 +13,7 @@ const LoginPage = () => {
                 </div>
                 <button className='bg-blue-600 text-white p-2 m-1 rounded-3xl mt-4 w-[40vw] lg:w-[30vw]'>Login</button>
             </form>
-            <p className='text-sm text-white'>Don't have an account? <a href='/register' className='text-blue-600'>Register</a></p>
+            <p className='text-md text-white'>Don't have an account? <a href='/register' className='text-blue-600'>Register</a></p>
         </div>
     </div>
   )

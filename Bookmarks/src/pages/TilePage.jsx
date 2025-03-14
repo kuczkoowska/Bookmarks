@@ -4,7 +4,7 @@ import Tiles from '../components/Tiles'
 
 const TilePage = () => {
   const [background, setBackground] = React.useState('')
-  const [numberColumns, setNumberColumns] = React.useState(7)
+  const [numberColumns, setNumberColumns] = React.useState(4)
 
   const onClick = () => {
     console.log('Hello')
