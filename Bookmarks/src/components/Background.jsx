@@ -2,15 +2,22 @@ import React from "react";
 
 const Background = ( {setBackgroundImage, setShowBackground}) => {
 
+    React.useEffect(() => {
+        const savedBackground = localStorage.getItem('backgroundImage');
+        if (savedBackground) {
+            setBackgroundImage(savedBackground);
+        }
+    }, [setBackgroundImage]);
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             const selectedImage = URL.createObjectURL(file);
-            params.setBackgroundImage(selectedImage);
+            setBackgroundImage(selectedImage);
+            localStorage.setItem('backgroundImage', selectedImage);
             setShowBackground(false);
         }
     };
-
     return (
         <div className="fixed inset-0 bg-gray-800/50 flex justify-center items-center h-screen w-screen z-[9999]">
             <div className="bg-white p-6 rounded-lg shadow-lg">
