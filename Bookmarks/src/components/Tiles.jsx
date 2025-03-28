@@ -13,7 +13,7 @@ const Tiles = ( params ) => {
 
   return (
     <div className={`grid ${gridClass} gap-5`}>
-      <Pages onClick={params.onClick} columns={params.columns} />
+      <Pages onClick={params.onClick} columns={params.columns} pages={params.pages} setPages={params.setPages} />
     </div>
   );
 }

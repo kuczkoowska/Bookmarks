@@ -8,7 +8,7 @@ import menu from '../icons/menu.png';
 import ScaleSlider from './ScaleSlider';
 import Background from './Background';
 
-const Navbar = (params) => {
+const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages}) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
     const [showScale, setShowScale] = useState(false);
@@ -17,6 +17,13 @@ const Navbar = (params) => {
 
     const navigate = useNavigate();
 
+    const addPage = (url = null) => {
+        const newPage = { number: pages.length + 1, url: url || null };
+        setPages([...pages, newPage]);
+    };
+
+    // <ul className="flex justify-between items-center relative text-white"> 
+    // wylicza srednia i na tej podstawie dobiera kolor
 
     return (
         <>
@@ -25,10 +32,15 @@ const Navbar = (params) => {
             </div>
 
             <div className={`fixed top-0 right-0 w-md backdrop-filter backdrop-blur-md m-4 rounded-xl`}>
-                <ul className="flex justify-between items-center relative">
+                <ul className="flex justify-between items-center relative"> 
                     {showMenu && (
                         <>
-                            <li className="text-3xl font-bold cursor-pointer">+</li>
+                            <li className="text-3xl font-bold cursor-pointer" onClick={() => {
+                                const url = prompt('Please enter the URL of the page:');
+                                if (url) {
+                                    addPage(url);
+                                }
+                            }}>+</li>
                             <li className="text-xl font-bold cursor-pointer">
                                 <img src={background} alt="background icon" style={{ maxWidth: '35px' }} onClick={() => setShowBackground(!showBackground)} />
                             </li>
@@ -48,15 +60,15 @@ const Navbar = (params) => {
 
             {showBackground && (
                 <Background
-                setBackgroundImage={params.setBackgroundImage} 
-                setShowBackground={setShowBackground} 
-            />
+                    setBackgroundImage={setBackgroundImage}
+                    setShowBackground={setShowBackground}
+                />
             )}
             {showScale && (
                 <ScaleSlider
                     scaleValue={scaleValue}
                     setScaleValue={setScaleValue}
-                    setNumberColumns={params.setNumberColumns}
+                    setNumberColumns={setNumberColumns}
                     setShowScale={setShowScale}
                 />
             )}
