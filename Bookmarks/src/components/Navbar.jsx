@@ -9,7 +9,7 @@ import ScaleSlider from './ScaleSlider';
 import Background from './Background';
 import ShowPopup from './ShowPopUp';
 
-const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowEdit, showEdit}) => {
+const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowEdit, showEdit, addPage }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
     const [showScale, setShowScale] = useState(false);
@@ -21,11 +21,6 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
     const [popupInput, setPopupInput] = useState('');
 
     const navigate = useNavigate();
-
-    const addPage = (url = null) => {
-        const newPage = { number: pages.length + 1, url: url || null };
-        setPages([...pages, newPage]);
-    };
 
     const calculateBackgroundBrightness = () => {
         const backgroundImage = localStorage.getItem('backgroundImage');
@@ -102,10 +97,10 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
 
             {showPopup && (
                 <ShowPopup
-                    setShowPopup={setShowPopup}
-                    addPage={addPage}
-                    popupInput={popupInput}
-                    setPopupInput={setPopupInput}
+                setShowPopup={setShowPopup}
+                addPage={addPage}
+                popupInput={popupInput}
+                setPopupInput={setPopupInput}
                 />
             )}
 
