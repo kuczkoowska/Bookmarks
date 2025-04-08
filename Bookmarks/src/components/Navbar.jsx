@@ -7,6 +7,7 @@ import scale from '../icons/scale.png';
 import menu from '../icons/menu.png';
 import ScaleSlider from './ScaleSlider';
 import Background from './Background';
+import ShowPopup from './ShowPopUp';
 
 const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowEdit, showEdit}) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -16,6 +17,8 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
     const [iconColor, setIconColor] = useState(() => {
         localStorage.getItem('iconColor') || 'black';
     });
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupInput, setPopupInput] = useState('');
 
     const navigate = useNavigate();
 
@@ -66,6 +69,7 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
         filter: iconColor === 'white' ? 'invert(1)' : 'none'
     };
 
+
     return (
         <>
             <div className="fixed top-0 left-0 w-md p-1 m-4 rounded-xl cursor-pointer">
@@ -78,12 +82,7 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
                         <>
                             <li className={`text-3xl font-bold cursor-pointer`} 
                                 style={{color: iconColor}}
-                                onClick={() => {
-                                    const url = prompt('Please enter the URL of the page:');
-                                    if (url) {
-                                        addPage(url);
-                                    }
-                                }}>+</li>
+                                onClick={() => setShowPopup(true)}>+</li>
                             <li className="text-xl font-bold cursor-pointer">
                                 <img src={background} alt="background icon" style={iconStyle} onClick={() => setShowBackground(!showBackground)} />
                             </li>
@@ -101,6 +100,15 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
                 </ul>
             </div>
 
+            {showPopup && (
+                <ShowPopup
+                    setShowPopup={setShowPopup}
+                    addPage={addPage}
+                    popupInput={popupInput}
+                    setPopupInput={setPopupInput}
+                />
+            )}
+
             {showBackground && (
                 <Background
                     setBackgroundImage={setBackgroundImage}
@@ -115,7 +123,6 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
                     setShowScale={setShowScale}
                 />
             )}
-
         </>
     );
 };
