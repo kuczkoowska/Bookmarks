@@ -54,7 +54,7 @@ const TilePage = () => {
             setPages={setPages} 
             showEdit={showEdit} 
             setShowEdit={setShowEdit} 
-            addPage={addPage} 
+            addPage={addPage}
           />
           <Tiles 
             columns={numberColumns} 

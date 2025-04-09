@@ -48,7 +48,7 @@ const Draggable = ({
       style={{ 
         height: size, 
         width: size,
-        background: hasFavicon ? `url(${favicons[page.number]}) center center/80% no-repeat` : '#f9a8d4'
+        background:`url(${favicons[page.number]}) center center/80% no-repeat`
       }}
     >
       <span className="bg-white/80 px-2 py-1 rounded text-sm text-center line-clamp-2">{title}</span>
@@ -66,7 +66,7 @@ const Draggable = ({
       style={{ 
         height: size, 
         width: size,
-        background: hasFavicon ? `url(${favicons[page.number]}) center center/80% no-repeat` : '#f9a8d4'
+        background: `url(${favicons[page.number]}) center center/80% no-repeat`
       }}
       onClick={() => handlePageClick(page)}
     >

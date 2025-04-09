@@ -24,7 +24,11 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
 
     const calculateBackgroundBrightness = () => {
         const backgroundImage = localStorage.getItem('backgroundImage');
-        if (!backgroundImage) return;
+        if (!backgroundImage) {
+            setIconColor('black');
+            localStorage.setItem('iconColor', 'black');
+            return;
+        }
 
         const img = new Image();
         img.src = backgroundImage;
