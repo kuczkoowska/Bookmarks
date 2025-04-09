@@ -97,6 +97,15 @@ const Navbar = ({ setBackgroundImage, setNumberColumns, pages, setPages, setShow
             icon: background,
             label: "Change background",
             onClick: () => setShowBackground(!showBackground),
+            add: showBackground && (
+                <li>
+                    <Background
+                        setBackgroundImage={setBackgroundImage}
+                        setShowBackground={setShowBackground}
+                        color={iconColor}
+                    />
+                </li>
+            )
         },
         {
             icon: scale,
@@ -127,7 +136,7 @@ const Navbar = ({ setBackgroundImage, setNumberColumns, pages, setPages, setShow
                 <img src={menu} alt="menu icon" onClick={() => setShowMenu(!showMenu)} style={iconStyle} />
             </div>
 
-            <div className="fixed top-0 left-0 h-full w-[20%]" style={menuStyle}>
+            <div className="fixed top-0 left-0 h-full w-[20%] overflow-y-auto" style={menuStyle}>
                 <ul className="flex flex-col">
                     <li className='text-xl font-bold cursor-pointer p-6'>
                         <img src={menu} alt="menu icon" onClick={() => setShowMenu(!showMenu)} style={iconStyle} />
@@ -153,13 +162,6 @@ const Navbar = ({ setBackgroundImage, setNumberColumns, pages, setPages, setShow
             <div className="fixed top-0 right-0 p-1 m-4 rounded-xl cursor-pointer">
                 <img src={user} alt="user icon" style={iconStyle} onClick={() => navigate('/login')} />
             </div>
-
-            {showBackground && (
-                <Background
-                    setBackgroundImage={setBackgroundImage}
-                    setShowBackground={setShowBackground}
-                />
-            )}
         </>
     );
 };
