@@ -29,12 +29,16 @@ const Draggable = ({
   const [, drop] = useDrop({
     accept: ItemTypes.TILE,
     hover: (item, monitor) => {
+      if (!monitor.isOver({ shallow: true })) return;
       if (item.index === index) {
         return;
       }
-      moveCard(item.index, index);
-      item.index = index;
     },
+    drop: (item) => {
+      if (item.index !== index) {
+        moveCard(item.index, index);
+      }
+    }
   });
 
   return showEdit ? (
