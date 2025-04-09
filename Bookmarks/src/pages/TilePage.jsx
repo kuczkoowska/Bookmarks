@@ -14,7 +14,13 @@ const TilePage = () => {
   const [background, setBackground] = useState(() => {
     return localStorage.getItem('backgroundImage') || '';
   });
-  const [numberColumns, setNumberColumns] = useState(4);
+  const [numberColumns, setNumberColumns] = useState(() => {
+    const savedColumns = localStorage.getItem('numberColumns');
+    if (!savedColumns) {
+      localStorage.setItem('numberColumns', '4');
+    }
+    return savedColumns ? parseInt(savedColumns, 10) : 4;
+  });
   const [showEdit, setShowEdit] = useState(false);
   const [pages, setPages] = useState(getSavedPages);
 
