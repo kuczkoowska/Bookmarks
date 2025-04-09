@@ -3,7 +3,7 @@ import '../styles/shake.css';
 import Draggable from './Draggable';
 
 const Pages = (params) => {
-  const cols = params.columns || 1;
+  const cols = params.columns;
   const size = `calc(var(--spacing) * ${Math.max(30, 160 / cols)})`;
   const [favicons, setFavicons] = useState({});
   const [pageTitles, setPageTitles] = useState({});

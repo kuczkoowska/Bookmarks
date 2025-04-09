@@ -9,7 +9,7 @@ import ScaleSlider from './ScaleSlider';
 import Background from './Background';
 import ShowPopup from './ShowPopUp';
 
-const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowEdit, showEdit, addPage }) => {
+const Navbar = ({ setBackgroundImage, setNumberColumns, pages, setPages, setShowEdit, showEdit, addPage }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
     const [showScale, setShowScale] = useState(false);
@@ -44,7 +44,7 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
             let r, g, b, avg;
             let colorSum = 0;
 
-            for(let x = 0, len = data.length; x < len; x += 4) {
+            for (let x = 0, len = data.length; x < len; x += 4) {
                 r = data[x];
                 g = data[x + 1];
                 b = data[x + 2];
@@ -68,6 +68,46 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
         filter: iconColor === 'white' ? 'invert(1)' : 'none'
     };
 
+    const menuStyle = {
+        transform: showMenu ? 'translateX(0)' : 'translateX(-100%)',
+        transition: 'transform 0.3s ease-in-out',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        backdropFilter: 'blur(8px)',
+    };
+
+
+    const menuItems = [
+        {
+            label: "Add new page",
+            onClick: () => setShowPopup(true),
+            extra: <p className='text-3xl'>+</p>,
+        },
+        {
+            icon: background,
+            label: "Change background",
+            onClick: () => setShowBackground(!showBackground),
+        },
+        {
+            icon: scale,
+            label: "Resize",
+            onClick: () => setShowScale(!showScale),
+            add: showScale && (
+                <li>
+                <ScaleSlider
+                    scaleValue={scaleValue}
+                    setScaleValue={setScaleValue}
+                    setNumberColumns={setNumberColumns}
+                    setShowScale={setShowScale}
+                />
+                </li>
+            )
+        },
+        {
+            icon: edit,
+            label: "Edit",
+            onClick: () => setShowEdit(!showEdit),
+        },
+    ];
 
     return (
         <>
@@ -75,36 +115,39 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
                 <img src={menu} alt="menu icon" onClick={() => setShowMenu(!showMenu)} style={iconStyle} />
             </div>
 
-            <div className={`fixed top-0 right-0 w-md backdrop-filter backdrop-blur-md m-4 rounded-xl`}>
-                <ul className="flex justify-between items-center relative ml-6"> 
-                    {showMenu && (
-                        <>
-                            <li className={`text-3xl font-bold cursor-pointer`} 
-                                style={{color: iconColor}}
-                                onClick={() => setShowPopup(true)}>+</li>
-                            <li className="text-xl font-bold cursor-pointer">
-                                <img src={background} alt="background icon" style={iconStyle} onClick={() => setShowBackground(!showBackground)} />
-                            </li>
-                            <li className="text-xl font-bold cursor-pointer relative">
-                                <img src={scale} alt="scale icon" style={iconStyle} onClick={() => setShowScale(!showScale)} />
-                            </li>
-                            <li className="text-xl font-bold cursor-pointer">
-                                <img src={edit} alt="edit icon" style={iconStyle} onClick={() => setShowEdit(!showEdit)} />
-                            </li>
-                        </>
-                    )}
-                    <li onClick={() => navigate('/login')} className={`text-xl font-bold cursor-pointer ${showMenu ? '' : 'fixed right-0 top-0'}`}>
-                        <img src={user} alt="user icon" style={iconStyle} />
+            <div className="fixed top-0 left-0 h-full w-[20%]" style={menuStyle}>
+                <ul className="flex flex-col">
+                    <li className='text-xl font-bold cursor-pointer p-6'>
+                        <img src={menu} alt="menu icon" onClick={() => setShowMenu(!showMenu)} style={iconStyle} />
                     </li>
+                    {menuItems.map((item, index) => (
+                        <>
+                            <li
+                                key={index}
+                                className="text-xl font-bold cursor-pointer flex items-center gap-6 hover:bg-black/10 pl-6 py-6"
+                                style={{ color: iconColor }}
+                                onClick={item.onClick}
+                            >
+                                {item.icon && (<img src={item.icon} alt={`${item.label} icon`} style={iconStyle} />)}
+                                {item.extra && item.extra}
+                                <p>{item.label}</p>
+                            </li>
+                            {item.add && item.add}
+                        </>
+                    ))}
                 </ul>
+            </div>
+
+            <div className="fixed top-0 right-0 p-1 m-4 rounded-xl cursor-pointer">
+                <img src={user} alt="user icon" style={iconStyle} onClick={() => navigate('/login')} />
             </div>
 
             {showPopup && (
                 <ShowPopup
-                setShowPopup={setShowPopup}
-                addPage={addPage}
-                popupInput={popupInput}
-                setPopupInput={setPopupInput}
+                    setShowPopup={setShowPopup}
+                    addPage={addPage}
+                    popupInput={popupInput}
+                    setPopupInput={setPopupInput}
                 />
             )}
 
@@ -112,14 +155,6 @@ const Navbar = ({setBackgroundImage, setNumberColumns, pages, setPages, setShowE
                 <Background
                     setBackgroundImage={setBackgroundImage}
                     setShowBackground={setShowBackground}
-                />
-            )}
-            {showScale && (
-                <ScaleSlider
-                    scaleValue={scaleValue}
-                    setScaleValue={setScaleValue}
-                    setNumberColumns={setNumberColumns}
-                    setShowScale={setShowScale}
                 />
             )}
         </>
