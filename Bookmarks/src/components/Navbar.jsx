@@ -79,8 +79,19 @@ const Navbar = ({ setBackgroundImage, setNumberColumns, pages, setPages, setShow
     const menuItems = [
         {
             label: "Add new page",
-            onClick: () => setShowPopup(true),
+            onClick: () => setShowPopup(!showPopup),
             extra: <p className='text-3xl'>+</p>,
+            add: showPopup && (
+                <li>
+                    <ShowPopup
+                        setShowPopup={setShowPopup}
+                        addPage={addPage}
+                        popupInput={popupInput}
+                        setPopupInput={setPopupInput}
+                        color={iconColor}
+                    />
+                </li>
+            )
         },
         {
             icon: background,
@@ -98,6 +109,7 @@ const Navbar = ({ setBackgroundImage, setNumberColumns, pages, setPages, setShow
                     setScaleValue={setScaleValue}
                     setNumberColumns={setNumberColumns}
                     setShowScale={setShowScale}
+                    color={iconColor}
                 />
                 </li>
             )
@@ -141,15 +153,6 @@ const Navbar = ({ setBackgroundImage, setNumberColumns, pages, setPages, setShow
             <div className="fixed top-0 right-0 p-1 m-4 rounded-xl cursor-pointer">
                 <img src={user} alt="user icon" style={iconStyle} onClick={() => navigate('/login')} />
             </div>
-
-            {showPopup && (
-                <ShowPopup
-                    setShowPopup={setShowPopup}
-                    addPage={addPage}
-                    popupInput={popupInput}
-                    setPopupInput={setPopupInput}
-                />
-            )}
 
             {showBackground && (
                 <Background

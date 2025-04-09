@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ScaleSlider = ({ scaleValue, setScaleValue, setNumberColumns, setShowScale }) => {
+const ScaleSlider = ({ scaleValue, setScaleValue, setNumberColumns, setShowScale, color }) => {
     const [tempValue, setTempValue] = useState(() => {
         const savedColumns = localStorage.getItem('numberColumns');
         const initialValue = savedColumns ? parseInt(savedColumns, 10) : 4;
@@ -28,7 +28,7 @@ const ScaleSlider = ({ scaleValue, setScaleValue, setNumberColumns, setShowScale
     };
 
     return (
-        <div className="p-4 rounded-lg z-[9999] px-8">
+        <div className={`p-4 px-8 text-${color}`}>
             <div className="relative flex items-center w-full">
                 <input
                     type="range"
@@ -53,9 +53,9 @@ const ScaleSlider = ({ scaleValue, setScaleValue, setNumberColumns, setShowScale
                     </span>
                 ))}
             </div>
-            <div className='py-1 px-4'>
+            <div className='py-1 px-4 flex justify-between'>
                 <button
-                    className="mt-4 mr-4 bg-red-500 text-white py-1 rounded-xl cursor-pointer w-[45%]"
+                    className="mt-4 bg-red-500 text-white py-1 rounded-xl cursor-pointer w-[45%]"
                     onClick={handleCancel}
                 >
                     Cancel

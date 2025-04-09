@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ShowPopUp = ({ addPage, setShowPopup, popupInput, setPopupInput }) => {
+const ShowPopUp = ({ addPage, setShowPopup, popupInput, setPopupInput, color}) => {
     const handleAddPage = () => {
         if (popupInput) {
             addPage(popupInput);
@@ -11,31 +11,32 @@ const ShowPopUp = ({ addPage, setShowPopup, popupInput, setPopupInput }) => {
 
     return (
         <>
-            <div className="fixed inset-0 bg-gray-800/50 flex justify-center items-center h-screen w-screen z-[9999]">
-                <div className="bg-white p-6 rounded-lg shadow-lg">
-                    <h2 className="text-xl font-bold mb-6 text-center">Enter the URL of the page:</h2>
+        <div className={`p-4 px-8 text-${color}`}>
+                    <h2 className="font-bold mb-6 text-center">Enter the URL of the page:</h2>
                     <input
                         type="text"
                         value={popupInput}
                         onChange={(e) => setPopupInput(e.target.value)}
-                        className="border p-2 w-full mb-4 rounded-2xl"
+                        placeholder='https://example.com'
+                        className="border p-2 w-[80%] mb-4 rounded-2xl flex justify-center items-center mx-auto focus:outline-none"
                     />
-                    <div className="flex justify-end">
+                    <div className='py-1 px-4 flex justify-between'>
                         <button
-                            onClick={() => setShowPopup(false)}
-                            className="bg-red-500 text-white px-4 py-2 rounded-3xl cursor-pointer"
+                            className="py-1 bg-red-500 text-white rounded-xl cursor-pointer w-[45%]"
+                            onClick={() => {
+                                setShowPopup(false);
+                            }}
                         >
                             Cancel
                         </button>
                         <button
+                            className="py-1 bg-blue-500 text-white rounded-xl cursor-pointer w-[45%]"
                             onClick={handleAddPage}
-                            className="bg-blue-500 text-white px-4 py-2 rounded-3xl cursor-pointer ml-2"
                         >
-                            Add
+                            Apply
                         </button>
                     </div>
-                </div>
-            </div>
+                    </div>
         </>
     )
 }
