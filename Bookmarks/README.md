@@ -1,12 +1,43 @@
-# React + Vite
+# Bookmarks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, customizable bookmark manager built with React and Vite. Organize your favorite web pages in a visually appealing, drag-and-drop tile interface. Personalize your experience with custom backgrounds, adjustable grid layouts, and easy-to-use navigation.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Tile-based Bookmark Dashboard:**  
+  Add, edit, and delete bookmarks as tiles. Drag and drop to rearrange them.
 
-## Expanding the ESLint configuration
+- **Customizable Layout:**  
+  Change the number of columns to resize your dashboard using the built-in slider.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Background Personalization:**  
+  Upload your own background image or reset to default for a unique look.
+
+- **Favicon & Title Fetching:**  
+  Each bookmark displays the website's favicon and title for easy identification.
+
+- **User Authentication Pages:**  
+  Includes simple Login and Register pages (UI only, no backend).
+
+- **Modern Stack:**  
+  - React for UI  
+  - Tailwind CSS for styling  
+  - [react-dnd](https://react-dnd.github.io/react-dnd/about) for drag-and-drop
+
+## Project Structure
+
+- `src/components/` — Reusable UI components (Navbar, Tiles, Draggable, etc.)
+- `src/pages/` — Main app pages (TilePage, LoginPage, RegisterPage)
+- `src/utils/` — Utility files (e.g., drag-and-drop item types)
+- `src/assets/` and `src/icons/` — Images and icons
+- `src/styles/` — Custom CSS (e.g., shake animation)
+- `public/` — Static assets
+
+
+## Edit
+
+![edit](image.png)
+
+## Menu
+
+![menu](image-1.png)
